@@ -32,6 +32,10 @@ test-results/
 .DS_Store
 Thumbs.db
 
+# Local agent handoff notes must never be published.
+/agent.md
+/AGENTS.md
+
 # Public release uses explicit test/script allowlists.
 /test/*
 !/test/publicRelease.test.js
