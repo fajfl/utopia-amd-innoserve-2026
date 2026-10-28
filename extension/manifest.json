@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "ECS NEO 591 Partner Intake Demo",
+  "version": "0.1.1",
+  "description": "Injects an ECS NEO LINE rental-agent entry on user-viewed 591 listing pages.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://rent.591.com.tw/*",
+    "http://localhost:3000/*",
+    "https://*.ngrok-free.app/*",
+    "https://*.ngrok.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://rent.591.com.tw/*"
+      ],
+      "js": [
+        "content/pageDataBridge.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://rent.591.com.tw/*"
+      ],
+      "js": [
+        "content/listingAdapter.js",
+        "content/contentScript.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
+    }
+  ],
+  "action": {
+    "default_title": "ECS NEO 591 Demo"
+  }
+}

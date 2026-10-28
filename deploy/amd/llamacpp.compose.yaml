@@ -1,0 +1,34 @@
+services:
+  inference:
+    image: ${LLAMACPP_IMAGE:?Set a pinned ghcr.io/ggml-org/llama.cpp server-rocm image}
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+    ports:
+      - "127.0.0.1:8001:8000"
+    volumes:
+      - type: bind
+        source: ${MODEL_DIR:?Set the absolute directory containing GGUF weights}
+        target: /models
+        read_only: true
+        bind:
+          create_host_path: false
+    command:
+      - --model
+      - /models/${GGUF_FILE:?Set a GGUF filename relative to MODEL_DIR}
+      - --alias
+      - ${SERVED_MODEL_NAME:-ecsneo-model}
+      - --api-key
+      - ${INFERENCE_API_KEY:?Set an independent inference key}
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --jinja
+      - --n-gpu-layers
+      - "999"
+      - --ctx-size
+      - ${CONTEXT_SIZE:-8192}

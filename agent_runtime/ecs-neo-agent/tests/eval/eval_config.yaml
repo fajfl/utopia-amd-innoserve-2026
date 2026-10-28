@@ -1,0 +1,6 @@
+metrics_to_run:
+  - ecs_neo_action_contract
+
+custom_metrics:
+  - name: ecs_neo_action_contract
+    custom_function_file: contract_action.py

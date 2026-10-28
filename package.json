@@ -1,0 +1,41 @@
+{
+  "name": "utopia-amd-innoserve-2026",
+  "version": "1.0.0",
+  "description": "屋托邦 AMD AI 代理人比賽版：LINE 租屋協商與 llama.cpp 推論整合。",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node --test --require ./test/helpers/isolateDatabase.js test/aiConfigService.test.js test/deepseekClients.test.js test/publicRelease.test.js",
+    "db:v2:migrate": "node scripts/migrate-v2.js",
+    "db:v2:seed": "node scripts/seed-v2.js",
+    "db:tidb:migrate": "node scripts/migrate-tidb.js",
+    "db:v2:test:reset": "node scripts/reset-test-db.js --blank",
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "check:public": "node scripts/check-public-release.js"
+  },
+  "keywords": [
+    "line",
+    "webhook",
+    "sqlite",
+    "mvp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=25"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1125.0",
+    "@line/bot-sdk": "^9.8.0",
+    "axios": "^1.13.2",
+    "better-sqlite3": "^12.4.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "google-auth-library": "^11.0.2",
+    "mysql2": "^3.23.3",
+    "openai": "^6.36.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
