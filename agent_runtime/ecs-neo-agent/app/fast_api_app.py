@@ -105,7 +105,8 @@ async def _run_coordinator(runner: Runner, turn: dict[str, Any]) -> str:
     ):
         if event.is_final_response() and event.content and event.content.parts:
             final_text = "".join(
-                part.text for part in event.content.parts if getattr(part, "text", None)
+                part.text for part in event.content.parts
+                if getattr(part, "text", None) and not getattr(part, "thought", False)
             )
     return final_text
 

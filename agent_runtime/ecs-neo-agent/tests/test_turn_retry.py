@@ -36,6 +36,22 @@ class TurnRetryTest(unittest.TestCase):
         self.assertEqual(result["type"], "no_action")
         self.assertEqual(sessions, ["exec-1", "exec-1:retry"])
 
+    def test_reasoning_parts_are_not_part_of_the_answer(self):
+        from types import SimpleNamespace as NS
+
+        class Sessions:
+            async def get_session(self, **_):
+                return object()
+
+        class Runner:
+            app_name, session_service = 'test', Sessions()
+
+            async def run_async(self, **_):
+                parts = [NS(text='We need to think', thought=True), NS(text=GOOD, thought=False)]
+                yield NS(is_final_response=lambda: True, content=NS(parts=parts))
+
+        self.assertEqual(asyncio.run(fast_api_app._run_coordinator(Runner(), {})), GOOD)
+
 
 if __name__ == "__main__":
     unittest.main()
