@@ -1,0 +1,115 @@
+{
+  "templateCode": "tw-residential",
+  "versionLabel": "113-07-08",
+  "title": "住宅租賃契約書範本(企業或個人出租通用)",
+  "issuingAuthority": "內政部",
+  "sourceReference": "template/33-(113-07-08)住宅租賃契約書範本(企業或個人出租通用).docx",
+  "sourceVerification": "unverified_local_fixture",
+  "sourceVerificationNote": "條次與名稱取自 repo 內既有 DOCX 檔名所示版本;本檔尚未與官方公布文本逐字核對,正式使用前必須重新抓取官方來源、人工審閱並建立新的 source_checksum。",
+  "slotCoverage": "partial",
+  "slotCoverageNote": "只列出目前協商流程會產生的條件欄位。契約全文其餘條次屬於範本固定文字,不進 clause snapshot,也不由 AI 產生。",
+  "slots": [
+    {
+      "slot": "rent_monthly_amount",
+      "clauseField": "rentAmount",
+      "clauseRef": "第五條",
+      "clauseTitle": "租金約定及支付"
+    },
+    {
+      "slot": "deposit_amount",
+      "clauseField": "depositAmount",
+      "clauseRef": "第六條",
+      "clauseTitle": "押金約定及返還"
+    },
+    {
+      "slot": "lease_period_start",
+      "clauseField": "leaseStartDate",
+      "clauseRef": "第三條",
+      "clauseTitle": "租賃期間"
+    },
+    {
+      "slot": "lease_period_end",
+      "clauseField": "leaseEndDate",
+      "clauseRef": "第三條",
+      "clauseTitle": "租賃期間"
+    },
+    {
+      "slot": "move_in_date",
+      "clauseField": "moveInDate",
+      "clauseRef": "第四條",
+      "clauseTitle": "租賃標的之交付"
+    },
+    {
+      "slot": "utility_cost_allocation",
+      "clauseField": "utilityCostAllocation",
+      "clauseRef": "第七條",
+      "clauseTitle": "租賃期間相關費用之支付"
+    },
+    {
+      "slot": "repair_responsibility",
+      "clauseField": "repairResponsibility",
+      "clauseRef": "第十一條",
+      "clauseTitle": "修繕"
+    },
+    {
+      "slot": "early_termination",
+      "clauseField": "earlyTermination",
+      "clauseRef": "第十七條",
+      "clauseTitle": "提前終止租約"
+    },
+    {
+      "slot": "pet_keeping",
+      "clauseField": "petRequest",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "pet_allowed",
+      "clauseField": "petAllowed",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "sublease_allowed",
+      "clauseField": "subleaseAllowed",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "household_registration_allowed",
+      "clauseField": "householdRegistrationAllowed",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "tax_filing_allowed",
+      "clauseField": "taxFilingAllowed",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "subsidy_application_allowed",
+      "clauseField": "subsidyApplicationAllowed",
+      "clauseRef": "第九條",
+      "clauseTitle": "使用租賃住宅之限制"
+    },
+    {
+      "slot": "equipment_list",
+      "clauseField": "equipmentRequest",
+      "clauseRef": "第二條",
+      "clauseTitle": "租賃標的"
+    },
+    {
+      "slot": "viewing_arrangement",
+      "clauseField": "viewingRequest",
+      "clauseRef": "第十二條",
+      "clauseTitle": "室內裝修及使用管理"
+    },
+    {
+      "slot": "special_terms",
+      "clauseField": "specialRequest",
+      "clauseRef": "第二十一條",
+      "clauseTitle": "其他約定"
+    }
+  ]
+}

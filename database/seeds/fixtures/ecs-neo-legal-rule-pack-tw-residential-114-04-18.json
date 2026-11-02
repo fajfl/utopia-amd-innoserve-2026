@@ -1,0 +1,139 @@
+{
+  "packCode": "tw-residential-mandatory",
+  "versionLabel": "114-04-18",
+  "title": "住宅租賃定型化契約應記載及不得記載事項",
+  "issuingAuthority": "行政院/內政部",
+  "sourceVerification": "unverified_local_fixture",
+  "sourceVerificationNote": "本檔是 deterministic validator 的可執行規則子集,不是官方全文。ruleRef 刻意寫成自我描述的文字而不是點次編號,因為本機環境無法連外核對官方公告的實際點次;正式使用前必須依 .agents-cli-spec.md 列的官方來源重新抓取、人工審閱差異、補上正確點次與 source_checksum,並建立新的 rule-pack 版本(舊 artifact 仍綁舊版本,不就地改寫)。",
+  "coverage": "partial",
+  "coverageNote": "目前只實作四類可 deterministic 判斷的規則:必要條款缺漏、不得記載事項、條款矛盾與責任歸屬不明。審閱期、當事人基本資料、返還與通知等仍未納入,缺漏會以 requiredClauses 逐步補齊。",
+
+  "requiredClauses": [
+    {
+      "code": "required_rent_amount_missing",
+      "clauseField": "rentAmount",
+      "valueKind": "number",
+      "ruleRef": "應記載事項:租金金額及支付方式",
+      "label": "每月租金金額"
+    },
+    {
+      "code": "required_deposit_amount_missing",
+      "clauseField": "depositAmount",
+      "valueKind": "number",
+      "ruleRef": "應記載事項:押金金額及返還",
+      "label": "押金金額"
+    },
+    {
+      "code": "required_lease_start_missing",
+      "clauseField": "leaseStartDate",
+      "valueKind": "date",
+      "ruleRef": "應記載事項:租賃期間",
+      "label": "租賃期間起日"
+    },
+    {
+      "code": "required_lease_end_missing",
+      "clauseField": "leaseEndDate",
+      "valueKind": "date",
+      "ruleRef": "應記載事項:租賃期間",
+      "label": "租賃期間迄日"
+    }
+  ],
+
+  "responsibilityClauses": [
+    {
+      "clauseField": "repairResponsibility",
+      "ruleRef": "應記載事項:修繕",
+      "label": "修繕責任歸屬"
+    },
+    {
+      "clauseField": "utilityCostAllocation",
+      "ruleRef": "應記載事項:租賃期間相關費用之支付",
+      "label": "費用分擔"
+    },
+    {
+      "clauseField": "earlyTermination",
+      "ruleRef": "應記載事項:提前終止租約",
+      "label": "提前終止的條件與責任"
+    }
+  ],
+
+  "prohibitedTerms": [
+    {
+      "code": "prohibited_household_registration_restriction",
+      "ruleRef": "不得記載事項:不得約定禁止承租人遷入戶籍",
+      "label": "不得約定禁止或限制承租人遷入戶籍",
+      "deniedWhenFalse": ["householdRegistrationAllowed"],
+      "textPatterns": [
+        "(不得|不可|不能|不准|不許|不允許|禁止|拒絕)[^。；;\\n]{0,12}(遷入|遷)?戶籍",
+        "戶籍[^。；;\\n]{0,12}(不得|不可|不能|不准|不許|不允許|禁止|拒絕)"
+      ]
+    },
+    {
+      "code": "prohibited_tax_filing_restriction",
+      "ruleRef": "不得記載事項:不得約定禁止承租人申報租賃費用支出",
+      "label": "不得約定禁止承租人申報租賃費用支出(報稅)",
+      "deniedWhenFalse": ["taxFilingAllowed"],
+      "textPatterns": [
+        "(不得|不可|不能|不准|不許|不允許|禁止|拒絕)[^。；;\\n]{0,12}(報稅|申報租賃|申報租金|列舉扣除)",
+        "(報稅|申報租賃|申報租金|列舉扣除)[^。；;\\n]{0,12}(不得|不可|不能|不准|不許|不允許|禁止|拒絕)"
+      ]
+    },
+    {
+      "code": "prohibited_rent_subsidy_restriction",
+      "ruleRef": "不得記載事項:不得約定禁止承租人申請租金補貼",
+      "label": "不得約定禁止承租人申請租金補貼",
+      "deniedWhenFalse": ["subsidyApplicationAllowed"],
+      "textPatterns": [
+        "(不得|不可|不能|不准|不許|不允許|禁止|拒絕)[^。；;\\n]{0,12}(租金補貼|租屋補助|租補|申請補貼)",
+        "(租金補貼|租屋補助|租補|申請補貼)[^。；;\\n]{0,12}(不得|不可|不能|不准|不許|不允許|禁止|拒絕)"
+      ]
+    },
+    {
+      "code": "prohibited_deposit_forfeiture",
+      "ruleRef": "不得記載事項:不得約定承租人拋棄押金返還請求權",
+      "label": "不得約定承租人預先拋棄押金返還請求權",
+      "deniedWhenFalse": [],
+      "textPatterns": [
+        "押金[^。；;\\n]{0,12}(不退|不予返還|不得請求返還|概不退還|一律沒收|沒收)",
+        "(拋棄|放棄)[^。；;\\n]{0,12}押金[^。；;\\n]{0,12}(返還|請求)"
+      ]
+    }
+  ],
+
+  "conflictRules": [
+    {
+      "code": "conflict_lease_period_out_of_order",
+      "kind": "date_order",
+      "earlierField": "leaseStartDate",
+      "laterField": "leaseEndDate",
+      "ruleRef": "應記載事項:租賃期間",
+      "label": "租賃期間迄日不得早於起日"
+    },
+    {
+      "code": "conflict_move_in_before_lease_start",
+      "kind": "date_order",
+      "earlierField": "leaseStartDate",
+      "laterField": "moveInDate",
+      "ruleRef": "應記載事項:租賃標的之交付",
+      "label": "交付/入住日不得早於租賃期間起日"
+    },
+    {
+      "code": "conflict_lease_term_shorter_than_thirty_days",
+      "kind": "min_days",
+      "earlierField": "leaseStartDate",
+      "laterField": "leaseEndDate",
+      "minDays": 30,
+      "ruleRef": "住宅租賃契約:租期至少三十日",
+      "label": "租賃期間不得少於三十日"
+    },
+    {
+      "code": "conflict_deposit_exceeds_two_months_rent",
+      "kind": "max_ratio",
+      "numeratorField": "depositAmount",
+      "denominatorField": "rentAmount",
+      "maxRatio": 2,
+      "ruleRef": "土地法第九十九條/應記載事項:押金上限",
+      "label": "押金不得超過二個月租金總額"
+    }
+  ]
+}

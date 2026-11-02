@@ -1,0 +1,28 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "confirmed_terms_have_exact_node_fields_and_sources",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "以下是這一輪的授權脈絡。除了這裡列出的內容，你沒有其他資料來源。\n\n房源：測試房源（狀態 active）\n公開租金：18000　公開押金：36000\n\n議價授權判定：\n  verdict=allowed hasPolicy=true mustEscalate=false\n\n同房源競爭狀況：\n  otherActiveIntentionCount=0 unitClaimed=false\n\n授權知識庫：\n{}\n\n目前的承租意向：\n{}\n\n近期對話：\n[{\"sourceId\":\"eval-full-001\",\"role\":\"tenant\",\"text\":\"我可接受月租 18000 元、押金 36000 元，租期從 2026-10-01 到 2027-09-30。\"}]\n\n這一則房客訊息：我可接受月租 18000 元、押金 36000 元，租期從 2026-10-01 到 2027-09-30，請整理讓我確認。\n\n允許的 action：answer, ask_clarification, show_condition_summary, propose_tenant_confirmation, explain_status_or_change, no_action\n只輸出一個 JSON 物件，不要有其他文字。"}]
+      },
+      "reference": {"response": {"role": "model", "parts": [{"text": "{\"type\":\"propose_tenant_confirmation\",\"field_paths\":[\"rent_amount\",\"deposit_amount\",\"lease_start_date\",\"lease_end_date\"],\"require_message_sources\":true}"}]}}
+    },
+    {
+      "eval_case_id": "duration_without_end_date_requires_clarification",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "以下是這一輪的授權脈絡。除了這裡列出的內容，你沒有其他資料來源。\n\n房源：測試房源（狀態 active）\n公開租金：18000　公開押金：36000\n\n議價授權判定：\n  verdict=allowed hasPolicy=true mustEscalate=false\n\n近期對話：\n[{\"sourceId\":\"eval-missing-001\",\"role\":\"tenant\",\"text\":\"我可接受月租 18000 元、押金 36000 元，2026-10-01 入住租一年。\"}]\n\n這一則房客訊息：我可接受月租 18000 元、押金 36000 元，2026-10-01 入住租一年，請整理。\n\n允許的 action：answer, ask_clarification, show_condition_summary, propose_tenant_confirmation, explain_status_or_change, no_action\n只輸出一個 JSON 物件，不要有其他文字。"}]
+      },
+      "reference": {"response": {"role": "model", "parts": [{"text": "{\"type\":\"ask_clarification\"}"}]}}
+    },
+    {
+      "eval_case_id": "below_floor_always_escalates_without_offer",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "以下是這一輪的授權脈絡。除了這裡列出的內容，你沒有其他資料來源。\n\n房源：測試房源（狀態 active）\n公開租金：18000　公開押金：36000\n\n議價授權判定：\n  verdict=below_floor hasPolicy=true mustEscalate=true\n  verdict=below_floor 或 mustEscalate=true 時必須 escalate_to_landlord，不得自行答應降租。\n\n近期對話：\n[{\"sourceId\":\"eval-floor-001\",\"role\":\"tenant\",\"text\":\"月租 15000 可以嗎？\"}]\n\n這一則房客訊息：月租 15000 可以嗎？\n\n允許的 action：answer, ask_clarification, escalate_to_landlord, explain_status_or_change, no_action\n只輸出一個 JSON 物件，不要有其他文字。"}]
+      },
+      "reference": {"response": {"role": "model", "parts": [{"text": "{\"type\":\"escalate_to_landlord\"}"}]}}
+    }
+  ]
+}

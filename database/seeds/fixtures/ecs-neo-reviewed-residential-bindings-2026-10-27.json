@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "template": {
+    "publicId": "template-residential",
+    "code": "tw-residential",
+    "title": "住宅租賃契約書範本（企業或個人出租通用）",
+    "authority": "內政部",
+    "versionPublicId": "template-residential-113-07-08-verified-2026-10-27",
+    "versionLabel": "113-07-08-verified-2026-10-27",
+    "effectiveFrom": "2024-07-08",
+    "fixturePath": "ecs-neo-contract-template-tw-residential-verified-2026-10-27.json",
+    "sourcePath": "../../../docs/reference/residential-lease-sources/113-07-08-residential-lease-template.pdf",
+    "sourceUrl": "https://www.ey.gov.tw/File/5E3A0378DE78B213?A=C",
+    "sourceChecksum": "a2dc101c3fd3a1470b00dbf8cb8b435860afde8e0c469be1baefc71f08cf56da",
+    "publishedNoticeRef": "內政部台內地字第11302639334號函"
+  },
+  "rulePack": {
+    "publicId": "rules-residential",
+    "code": "tw-residential-mandatory",
+    "title": "住宅租賃定型化契約應記載及不得記載事項",
+    "authority": "內政部",
+    "versionPublicId": "rules-residential-114-04-18-verified-2026-10-27",
+    "versionLabel": "114-04-18-verified-2026-10-27",
+    "effectiveFrom": "2025-04-18",
+    "fixturePath": "ecs-neo-legal-rule-pack-tw-residential-verified-2026-10-27.json",
+    "sourcePath": "../../../docs/reference/residential-lease-sources/114-04-18-residential-lease-rules.pdf",
+    "sourceUrl": "https://www.ey.gov.tw/File/43BC094940995CFC?A=C",
+    "sourceChecksum": "fb25806446b812295e95237409e51f4eccffef18c134db126ded65610d2ddbb4",
+    "publishedNoticeRef": "內政部台內地字第1140113583號公告"
+  }
+}
